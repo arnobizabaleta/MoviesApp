@@ -106,6 +106,10 @@ searchFormBtn.addEventListener('click', () => { //El btn de busqueda redireccion
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.add('inactive');
     movieDetailSection.classList.remove('inactive');
+
+    // =>["#movie","id_movie"]
+    const [_, movieId] = location.hash.split('='); 
+    getMovieById(movieId);
   }
   
   function searchPage() {

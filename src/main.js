@@ -20,7 +20,11 @@ const api = axios.create({
       
       const movieContainer = document.createElement('div');
       movieContainer.classList.add('movie-container'); // Agrengando clase a movieContainer
-  
+      
+      movieContainer.addEventListener('click', () =>{ //Cada vez que click sobre movieContainer
+        location.hash ="#movie=" + movie.id ;
+      });
+
       const movieImg = document.createElement('img');
       movieImg.classList.add('movie-img');
       movieImg.setAttribute('alt', movie.title);//Definiendo atributo alt de movieImg
@@ -108,3 +112,28 @@ async function getTrendingMoviesPreview() {
     
     
   }
+
+  async function  getMovieById(id) {
+    const {data: movie } = await api('movie/' + id); //data: nombre por defecto from axios
+    //Renombrando data a movies
+    //Definiendo URL movieImg
+
+    const movieImgURL = 'https://image.tmdb.org/t/p/w500' + movie.poster_path;
+    console.log(movieImgURL);
+    headerSection.style.background =(`
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.35) 19.27%, //Degradado necesario para ver la backArrow
+      rgba(0, 0, 0, 0) 29.17%
+    ),
+    url(${movieImgURL})`); //Agregando img de fondo de la movie
+    //MovieDetail
+    movieDetailTitle.textContent = movie.title;
+    movieDetailDescription.textContent = movie.overview;
+    movieDetailScore.textContent = movie.vote_average ;
+    
+    //CategoryDetail
+    createCategories(movie.genres,movieDetailCategoriesList);
+  }
+
+ 
