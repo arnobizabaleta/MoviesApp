@@ -28,6 +28,9 @@ searchFormBtn.addEventListener('click', () => { //El btn de busqueda redireccion
     } else {
       homePage();
     }
+
+    document.body.scrollTop = 0; //Asegurando que al cambiar de location.hash
+    document.documentElement.scrollTop = 0;//La nueva vista siempre se comience en lo más alto
   }
   
   
