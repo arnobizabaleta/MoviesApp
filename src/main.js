@@ -89,3 +89,13 @@ async function getTrendingMoviesPreview() {
         
   }
   
+  async function getMoviesBySearch(searchValue){ //searchValue:Query
+    const { data } = await api('search/movie',{
+      params: { 
+        query: searchValue
+      }
+    });
+    const movies = data.results;
+    
+    createMovies(movies, genericSection);
+  }

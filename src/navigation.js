@@ -1,13 +1,23 @@
 searchFormBtn.addEventListener('click', () => { //El btn de busqueda redirecciona a
-    location.hash = '#search=';                 //La seccion de search
+    //searchFormInput.value: Valor de busqueda de los users
+    location.hash = '#search=' + searchFormInput.value;                 //La seccion de search
+    
   });
   
   trendingBtn.addEventListener('click', () => { // El boton de trening redireccione a
     location.hash = '#trends';                  //Tendencias
   }); 
   
+   
+  //En la funcion donde manejamos el evento click de arrowBtn ya no ponemos
+    // que nos devuelva a ‘#home’, sino a la URL que estuvimos anteriormente.
+    //Esto se logra mediante window.history que tiene
+    //varios métodos y entre ellos ‘back()’ que nos
+    //permite ir a la URL anterior que visito el usuario.
   arrowBtn.addEventListener('click', () => { //El botón de flechita redirecciona a 
-    location.hash = '#home'; //Al home de la app
+    //location.hash = '#home'; //Al home de la app
+    location.hash = window.history.back();
+   
   });
   
   window.addEventListener('DOMContentLoaded', navigator, false);//Escuchando el evento de contenido del DOM cargado y disparando la function navigator
@@ -105,13 +115,18 @@ searchFormBtn.addEventListener('click', () => { //El btn de busqueda redireccion
     arrowBtn.classList.remove('inactive');
     arrowBtn.classList.remove('header-arrow--white');
     headerTitle.classList.add('inactive');
-    headerCategoryTitle.classList.remove('inactive');
+    headerCategoryTitle.classList.add('inactive');
     searchForm.classList.remove('inactive');
   
     trendingPreviewSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+
+    // =>["#search","searchValue"], =:criterio de Separación
+    const [_, searchValue] = location.hash.split('='); 
+    //searchValue = query = ConsultaDelusuario
+    getMoviesBySearch(searchValue);
   }
   
   function trendsPage() {
