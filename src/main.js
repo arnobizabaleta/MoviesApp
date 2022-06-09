@@ -10,11 +10,12 @@ const api = axios.create({
 async function getTrendingMoviesPreview() {
     const { data } = await api('trending/movie/day');
     const movies = data.results;
-  
-    
+    //Solucionando problema de repeticion de datos por re-carga de una section
+    trendingMoviesPreviewList.innerHTML = ""; //Limipiando el contenedor de las peliculas en tendencia
     movies.forEach(movie => {
         //Seleccionando al elemento con clase .trendingPreview-movieList dentro del elemento con id #trendingPreview
-        const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList')
+        
+        
       
       const movieContainer = document.createElement('div');
       movieContainer.classList.add('movie-container'); // Agrengando clase a movieContainer
@@ -28,17 +29,18 @@ async function getTrendingMoviesPreview() {
       );
   
       movieContainer.appendChild(movieImg);
-      trendingPreviewMoviesContainer.appendChild(movieContainer);
+      trendingMoviesPreviewList.appendChild(movieContainer);
     });
   }
 
   async function getCategegoriesPreview() {
     const { data } = await api('genre/movie/list');
     const categories = data.genres;
-  
-    
-    categories.forEach(category => {
-      const previewCategoriesContainer = document.querySelector('#categoriesPreview .categoriesPreview-list')
+    //Solucionando problema de repeticion de datos por re-carga de una section
+      categoriesPreviewList.innerHTML = ""; //Limipiando el contenedor de las categorias
+                                            //Por cada vez q  se invoca la funcion getCa...
+      categories.forEach(category => {
+     
       
       const categoryContainer = document.createElement('div');
       categoryContainer.classList.add('category-container');
@@ -50,9 +52,7 @@ async function getTrendingMoviesPreview() {
   
       categoryTitle.appendChild(categoryTitleText);
       categoryContainer.appendChild(categoryTitle);
-      previewCategoriesContainer.appendChild(categoryContainer);
+      categoriesPreviewList.appendChild(categoryContainer);
     });
   }
   
-  getTrendingMoviesPreview();
-  getCategegoriesPreview();
