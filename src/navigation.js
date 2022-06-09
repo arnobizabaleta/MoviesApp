@@ -16,7 +16,8 @@ searchFormBtn.addEventListener('click', () => { //El btn de busqueda redireccion
     //permite ir a la URL anterior que visito el usuario.
   arrowBtn.addEventListener('click', () => { //El botón de flechita redirecciona a 
     //location.hash = '#home'; //Al home de la app
-    location.hash = window.history.back();
+   // location.hash = window.history.back();
+    history.back();
    
   });
   
@@ -144,4 +145,7 @@ searchFormBtn.addEventListener('click', () => { //El btn de busqueda redireccion
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+
+    headerCategoryTitle.innerText = "Tendencias";
+    getTrendingMovies();
   }
