@@ -1,3 +1,6 @@
+//Archivo para seleccionar y definir secciones, contenendores y elementos de HTML 
+//y poder utilizarlos en los archivos de lógica de navegación entre vistas
+//y en el main.js
 // Sections
 const headerSection = document.querySelector('#header');
 const trendingPreviewSection = document.querySelector('#trendingPreview');

@@ -1,20 +1,21 @@
-searchFormBtn.addEventListener('click', () => {
-    location.hash = '#search=';
+searchFormBtn.addEventListener('click', () => { //El btn de busqueda redirecciona a
+    location.hash = '#search=';                 //La seccion de search
   });
   
-  trendingBtn.addEventListener('click', () => {
-    location.hash = '#trends';
+  trendingBtn.addEventListener('click', () => { // El boton de trening redireccione a
+    location.hash = '#trends';                  //Tendencias
+  }); 
+  
+  arrowBtn.addEventListener('click', () => { //El botón de flechita redirecciona a 
+    location.hash = '#home'; //Al home de la app
   });
   
-  arrowBtn.addEventListener('click', () => {
-    location.hash = '#home';
-  });
-  
-  window.addEventListener('DOMContentLoaded', navigator, false);
-  window.addEventListener('hashchange', navigator, false);
-  
+  window.addEventListener('DOMContentLoaded', navigator, false);//Escuchando el evento de contenido del DOM cargado y disparando la function navigator
+  window.addEventListener('hashchange', navigator, false);//Escuchando el evento de cambio de extension de la pagina #
+  // y Disparando la funcion navigator que filtra las vistas según los cambios de location en la app
+  //Segun la ubicacion o  extensión en que se encuentre la App 
   function navigator() {
-    console.log({ location });
+    console.log({ location });//Print int Console the current app location 
     
     if (location.hash.startsWith('#trends')) {
       trendsPage();

@@ -12,8 +12,8 @@ async function getTrendingMoviesPreview() {
     const movies = data.results;
     //Solucionando problema de repeticion de datos por re-carga de una section
     trendingMoviesPreviewList.innerHTML = ""; //Limipiando el contenedor de las peliculas en tendencia
-    movies.forEach(movie => {
-        //Seleccionando al elemento con clase .trendingPreview-movieList dentro del elemento con id #trendingPreview
+    movies.forEach(movie => { //Por cada pelicula
+        
         
         
       
