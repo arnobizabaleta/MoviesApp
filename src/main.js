@@ -120,13 +120,15 @@ async function getTrendingMoviesPreview() {
 
     const movieImgURL = 'https://image.tmdb.org/t/p/w500' + movie.poster_path;
     console.log(movieImgURL);
-    headerSection.style.background =(`
+    //Degrado necesario para sombrear en negro la topImg Y resaltar el arroyBack
+    headerSection.style.background = `
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.35) 19.27%, //Degradado necesario para ver la backArrow
-      rgba(0, 0, 0, 0) 29.17%
+      rgba(0, 0, 0, 0.35) 19.27%, 
+      rgba(0, 0, 0, 0) 29.17%    
     ),
-    url(${movieImgURL})`); //Agregando img de fondo de la movie
+    url(${movieImgURL})
+  `; //Agregando img de fondo de la movie
     //MovieDetail
     movieDetailTitle.textContent = movie.title;
     movieDetailDescription.textContent = movie.overview;
@@ -134,6 +136,17 @@ async function getTrendingMoviesPreview() {
     
     //CategoryDetail
     createCategories(movie.genres,movieDetailCategoriesList);
+
+    //Obtener películas similares según el id_movie: 
+    getRelatedMovieById(id);
   }
 
- 
+ //Obtener películas relacionadas según el id_movie
+//Get a list of similar movies. 
+//This is not the same as the "Recommendation" system you see on the website.
+ async function  getRelatedMovieById(id) {
+  const {data } = await api(`/movie/${id}/similar`);
+  const relatedMovies = data.results;
+//moviesArray
+  createMovies(relatedMovies,relatedMoviesContainer);
+ }
