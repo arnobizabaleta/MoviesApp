@@ -33,7 +33,7 @@ async function getTrendingMoviesPreview() {
     });
   }
 
-  async function getCategegoriesPreview() {
+  async function getCategoriesPreview() {
     const { data } = await api('genre/movie/list');
     const categories = data.genres;
     //Solucionando problema de repeticion de datos por re-carga de una section
@@ -48,11 +48,44 @@ async function getTrendingMoviesPreview() {
       const categoryTitle = document.createElement('h3');
       categoryTitle.classList.add('category-title');
       categoryTitle.setAttribute('id', 'id' + category.id);
+      categoryTitle.addEventListener('click', ()=>{ //Al darle click al titulo de una categoria
+        location.hash = `#category=${category.id}-${category.name}`; //Cambiar la extensión y vista de la app a category
+      });
       const categoryTitleText = document.createTextNode(category.name);
   
       categoryTitle.appendChild(categoryTitleText);
       categoryContainer.appendChild(categoryTitle);
       categoriesPreviewList.appendChild(categoryContainer);
+    });
+  }
+
+  async function getMoviesByCategory(id) {
+    const { data } = await api('/discover/movie',{
+      params:{
+        with_genres: id,
+      }
+    });
+    const movies = data.results;
+    //Solucionando problema de repeticion de datos por re-carga de una section
+    genericSection.innerHTML = ""; //Limipiando la seccion de las peliculas genericas
+    movies.forEach(movie => { //Por cada pelicula
+        
+        
+        
+      
+      const movieContainer = document.createElement('div');
+      movieContainer.classList.add('movie-container'); // Agrengando clase a movieContainer
+  
+      const movieImg = document.createElement('img');
+      movieImg.classList.add('movie-img');
+      movieImg.setAttribute('alt', movie.title);//Definiendo atributo alt de movieImg
+      movieImg.setAttribute(
+        'src',
+        'https://image.tmdb.org/t/p/w300' + movie.poster_path,
+      );
+  
+      movieContainer.appendChild(movieImg);
+      genericSection.appendChild(movieContainer);
     });
   }
   

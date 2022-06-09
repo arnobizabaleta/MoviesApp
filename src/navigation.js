@@ -48,7 +48,7 @@ searchFormBtn.addEventListener('click', () => { //El btn de busqueda redireccion
     movieDetailSection.classList.add('inactive');
   
     getTrendingMoviesPreview();
-    getCategegoriesPreview();
+    getCategoriesPreview();
   }
   
   function categoriesPage() {
@@ -66,6 +66,15 @@ searchFormBtn.addEventListener('click', () => { //El btn de busqueda redireccion
     categoriesPreviewSection.classList.add('inactive');
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+    
+    const [_, categoryData] = location.hash.split('='); // =>["#category","id_category-name"], =:criterio de Separación
+    //const urlPage = url[0]; No es necesario
+    //const urlInfo = url[1];
+    const [categoryId, categoryName] = categoryData.split("-");
+    //=>["categoryId","categoryName"]
+    
+    headerCategoryTitle.innerText = categoryName; //Titulo nombre la categoria
+    getMoviesByCategory(categoryId);//La funcion recibe el id de la categoria com param
   }
   
   function movieDetailsPage() {
